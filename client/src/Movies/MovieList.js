@@ -3,27 +3,27 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import axios from 'axios';
 
 const MovieList = props => {
-  // const [movies, setMovies] = useState([])
+  const [movies, setMovies] = useState([])
   useEffect(() => {
-    // const getMovies = () => {
+    const getMovies = () => {
       axios
         .get('http://localhost:5000/api/movies')
         .then(response => {
-          props.setMovies(response.data);
+          setMovies(response.data);
         })
         .catch(error => {
           console.error('Server Error', error);
         });
-    // }
+    }
     
-    // getMovies();
+    getMovies();
   }, []);
 
-  console.log('movie list', props.movies)
+  console.log('movie list', movies)
   
   return (
     <div className="movie-list">
-      {props.movies.map(movie => (
+      {movies.map(movie => (
         <MovieDetails key={movie.id} movie={movie} />
       ))}
     </div>
